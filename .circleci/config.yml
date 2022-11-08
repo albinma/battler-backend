@@ -6,7 +6,7 @@ orbs:
 jobs:
   format:
     docker:
-      - image: mcr.microsoft.com/dotnet/sdk:latest
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
       - checkout
 
@@ -20,7 +20,7 @@ jobs:
 
   build-and-test:
     docker:
-      - image: mcr.microsoft.com/dotnet/sdk:latest
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
       - checkout
 
