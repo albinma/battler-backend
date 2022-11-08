@@ -1,1 +1,2 @@
 ## Add a .csharpierignore file to ignore additional files and folders. The file uses gitignore syntax
+**/*/bin
