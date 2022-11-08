@@ -1,0 +1,36 @@
+version: 2.1
+
+orbs:
+  docker: circleci/docker@2.1.2
+
+jobs:
+  format:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
+    steps:
+      - checkout
+
+      - run:
+          name: Restore dotnet tools
+          command: dotnet tool restore
+
+      - run:
+          name: Check formatting
+          command: dotnet csharpier . --check
+
+  build-and-test:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
+    steps:
+      - checkout
+
+      - run:
+          name: Run tests
+          command: |
+            dotnet test -c release
+
+workflows:
+  ci:
+    jobs:
+      - format
+      - build-and-test
