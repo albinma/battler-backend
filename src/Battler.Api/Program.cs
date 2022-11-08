@@ -61,20 +61,24 @@ try
 
     var app = builder.Build();
 
+    app.UseRequestTracing();
+
     app.UseHttpLogging();
 
     app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
-    app.UseHealthChecks("/health");
+    app.UseHealthChecks(Routes.HealthChecks);
 
     if (!builder.Environment.IsProduction())
     {
         app.UseSwagger();
         app.UseSwaggerUI(c =>
         {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hashit API");
+            c.SwaggerEndpoint(Routes.SwaggerDocument, "Hashit API");
         });
     }
+
+    app.UseRequestLocalization();
 
     app.UseRouting();
 
